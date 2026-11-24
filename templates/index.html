@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101916">
+  <title>The Omnitrix Black Box | GDG CTF</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="GDG CTF home"><span class="brand-mark">G</span> GDG CTF</a>
+      <span class="status"><i></i> FIELD ARCHIVE / OPEN</span>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">PLUMBER FIELD ARCHIVE <span>·</span> CASE 10-31</p>
+      <h1>The Omnitrix<br><em>Black Box</em></h1>
+      <p class="dek">A lost mission log. A damaged diagnostic file. Something in the crater learned where the boy hides.</p>
+    </section>
+
+    <section class="grid">
+      <article class="panel briefing">
+        <div class="section-head"><span class="index">01</span><h2>Mission briefing</h2></div>
+        <p>The Omnitrix lost its mission log during a Plumber relay failure. Gwen recovered a file from its diagnostics, but it will not behave like an ordinary one.</p>
+        <p>Gwen believes the recovered diagnostic file contains a trail that can restore the log. Recover the mission record and determine what Vilgax learned.</p>
+        <div class="download-card">
+          <div><span class="file-label">RECOVERED EVIDENCE</span><strong>blackbox.bin</strong><small>PNG image · forensic container</small></div>
+          <a class="button button-secondary" href="/blackbox.bin" download>Download <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="format">Flag format <code>GDG{...}</code></p>
+      </article>
+
+      <aside class="panel hints">
+        <div class="section-head"><span class="index">02</span><h2>Field hints</h2></div>
+        <p class="subtle">Open a hint when you need a nudge.</p>
+        {% for hint in hints %}
+        <details class="hint">
+          <summary><span>HINT {{ "%02d"|format(loop.index) }}</span><b aria-hidden="true">+</b></summary>
+          <p>{{ hint }}</p>
+        </details>
+        {% endfor %}
+      </aside>
+    </section>
+
+    <section class="panel submit-panel">
+      <div class="section-head"><span class="index">03</span><h2>Submit recovered flag</h2></div>
+      <p class="subtle">Enter the complete flag, including <code>GDG{</code> and <code>}</code>.</p>
+      <form action="/submit" method="post">
+        <label class="sr-only" for="flag">Flag</label>
+        <input id="flag" name="flag" type="text" placeholder="GDG{...}" autocomplete="off" spellcheck="false" maxlength="200" required>
+        <button class="button button-primary" type="submit">Check flag <span aria-hidden="true">→</span></button>
+      </form>
+      {% if result %}<p class="result result-{{ result[0] }}" role="status">{{ result[1] }}</p>{% endif %}
+    </section>
+
+    <footer><span>PLUMBER ARCHIVE SYSTEM</span><span>ALL SIGNALS SUBJECT TO REVIEW</span></footer>
+  </main>
+</body>
+</html>
